@@ -16,6 +16,6 @@ jobs:
     - name: Deploy Stage
       uses: fjogeleit/http-request-action@master
       with:
-        url: 'https://webhook.site/#!/d0ab7384-e547-490d-8457-f67755dee76d'
+        url: 'https://webhook.site/e1fd79ec-63e9-4c9f-afca-9da60b8f9f84'
         method: 'POST'
         data: '{"res": 200}'
