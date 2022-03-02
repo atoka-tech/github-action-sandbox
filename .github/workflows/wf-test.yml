@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Notify webhook
         run: |
-          [ "$ACTION_STATUS" == "success" ] && NOTIFY_RESULT= hoge || NOTIFY_RESULT=fuga
+          [ "$ACTION_STATUS" == "success" ] && NOTIFY_RESULT=hoge || NOTIFY_RESULT=fuga
           curl -n -X POST $NOTIFICATION_URL -H "Content-Type: application/json" -d "{ \"status\": \"$NOTIFY_RESULT $ACTION_STATUS\" }"
         env:
           ACTION_STATUS: ${{ job.status }}
