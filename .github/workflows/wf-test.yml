@@ -14,5 +14,5 @@ jobs:
           [ "$ACTION_STATUS" == "success" ] && NOTIFY_RESULT=hoge || NOTIFY_RESULT=fuga
           curl -n -X POST $NOTIFICATION_URL -H "Content-Type: application/json" -d "{ \"status\": \"$NOTIFY_RESULT $ACTION_STATUS\" }"
         env:
-          ACTION_STATUS: ${{ job.status }}
+          ACTION_STATUS: failer
           NOTIFICATION_URL: https://webhook.site/2fb88575-8248-47e9-b8af-f3df9bbb009e
