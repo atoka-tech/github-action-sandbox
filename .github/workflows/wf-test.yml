@@ -1,8 +1,9 @@
 name: Workflow test
 
 on:
-  repository_dispatch:
-    types: [publish-to-preview]
+  push:
+    branches:
+      - main
 
 jobs:
   build:
