@@ -1,9 +1,8 @@
 name: Workflow test
 
 on:
-  push:
-    branches:
-      - main
+  repository_dispatch:
+    types: [publish-to-preview]
 
 jobs:
   build:
@@ -11,7 +10,7 @@ jobs:
     steps:
       - name: Notify webhook
         run: |
-          curl -n -X POST $NOTIFICATION_URL -H "Content-Type: application/json" -d "{ \"status\": \"$NOTIFY_RESULT $ACTION_STATUS\" }"
+          curl -n -X POST $NOTIFICATION_URL -H "Content-Type: application/json" -d '{ "status": "'"$NOTIFY_RESULT $ACTION_STATUS"'" }'
         env:
           ACTION_STATUS: ${{ job.status }}
           NOTIFY_RESULT: "${{ job.status == 'success' && 'success1' || 'error1' }}"
