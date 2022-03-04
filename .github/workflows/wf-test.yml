@@ -5,7 +5,7 @@ on:
     types: [publish-to-preview]
 
 jobs:
-  build:ほげ
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Notify webhook
