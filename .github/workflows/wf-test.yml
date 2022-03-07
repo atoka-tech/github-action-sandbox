@@ -8,10 +8,19 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      run: [ $(($RANDOM % 2)) -eq 0 ] && exit 0 || exit 1
+    outputs:
+      job-status: ${{ job.status }}
+
+  notify:
+    if: ${{ always() }}
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
       - name: Notify webhook
         run: |
-          curl -n -X POST $NOTIFICATION_URL -H "Content-Type: application/json" -d '{ "status": "'"$NOTIFY_RESULT $ACTION_STATUS"'" }'
+          curl -n -X POST $NOTIFICATION_URL -H "Content-Type: application/json" -d '{ "status": "'"$BUILD_STATUS"'" }'
         env:
+          BUILD_STATUS: ${{ needs.build.outputs.job-status }}
           NOTIFY_RESULT: ${{ job.status == 'success' && 'success1' || 'error1' }}
-          ACTION_STATUS: ${{ job.status }}
           NOTIFICATION_URL: https://webhook.site/2fb88575-8248-47e9-b8af-f3df9bbb009e
