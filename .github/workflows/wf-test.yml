@@ -8,8 +8,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      run: |
-        [ $MESSAGE == 'ok' ] && exit 0 || exit 1
+      run: [ $MESSAGE == 'ok' ] && exit 0 || exit 1
       env:
         MESSAGE: ${{ github.event.client_payload.message }}
     outputs:
