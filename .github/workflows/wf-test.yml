@@ -8,7 +8,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      run: [ $(($RANDOM % 2)) -eq 0 ] && exit 0 || exit 1
+      run: |
+        [ $MESSAGE == 'ok' ] && exit 0 || exit 1
+      env:
+        MESSAGE: ${{ github.event.client_payload.message }}
     outputs:
       job-status: ${{ job.status }}
 
